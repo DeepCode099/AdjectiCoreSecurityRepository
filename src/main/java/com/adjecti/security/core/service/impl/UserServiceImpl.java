@@ -1,5 +1,6 @@
 package com.adjecti.security.core.service.impl;
 
+import java.util.Base64;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -21,6 +22,9 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User createUser(User user) {
+	 String password =	user.getPassword_();
+     String encodedPassword = Base64.getEncoder().encodeToString(password.getBytes());
+     user.setPassword_(encodedPassword);
 		return userRepository.save(user);
 	}
 
@@ -76,7 +80,7 @@ public class UserServiceImpl implements UserService {
 		existingUser.setPortletId(user.getPortletId());
 		existingUser.setReminderQueryAnswer(user.getReminderQueryAnswer());
 		existingUser.setReminderQueryQuestion(user.getReminderQueryQuestion());
-		existingUser.setScreenName(user.getScreenName());
+		existingUser.setUserName(user.getUserName());
 		existingUser.setStatus(user.getStatus());
 		existingUser.setTimeZoneId(user.getTimeZoneId());
 		existingUser.setUuid_(user.getUuid_());
@@ -89,5 +93,7 @@ public class UserServiceImpl implements UserService {
 		userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User", "Id", id));
 		userRepository.deleteById(id);
 	}
+
+	
 
 }

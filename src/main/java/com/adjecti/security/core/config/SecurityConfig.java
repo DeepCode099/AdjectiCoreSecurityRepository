@@ -10,7 +10,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.DefaultSecurityFilterChain;
@@ -36,7 +35,8 @@ public class SecurityConfig {
 	public UserDetailsService userDetailsService() {
 		return new CustomUserDetailService();
 	}
-		@Bean
+	
+	@Bean
 	public DaoAuthenticationProvider daoAuthenticationProvider() {
 		DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
 		daoAuthenticationProvider.setUserDetailsService(this.customUserDetailService);
@@ -46,15 +46,19 @@ public class SecurityConfig {
 	
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
-		httpSecurity.csrf()
+		 httpSecurity.csrf()
 		.disable()
 		.authorizeHttpRequests()
-		.requestMatchers("api/v1/auth/login")
+		.requestMatchers("api/v1/user")
+		.hasRole("ADMIN")
+	    .requestMatchers("api/v1/auth/login")
 		.permitAll()
 		.anyRequest()
 	    .authenticated()
 	    .and()
-	    .exceptionHandling().authenticationEntryPoint(this.jwtAuthenticationEntryPoint).and()
+	    .exceptionHandling()
+	    .authenticationEntryPoint(this.jwtAuthenticationEntryPoint)
+	    .and()
 	    .sessionManagement()
 	    .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		httpSecurity.addFilterBefore(this.jwtAuthenticationFilter,UsernamePasswordAuthenticationFilter.class);

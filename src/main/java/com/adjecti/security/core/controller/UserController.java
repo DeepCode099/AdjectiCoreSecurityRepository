@@ -21,6 +21,7 @@ import com.adjecti.security.core.service.UserService;
 public class UserController {
 
 	private UserService userService;
+	
 	public UserController(UserService userService) {
 		super();
 		this.userService = userService;

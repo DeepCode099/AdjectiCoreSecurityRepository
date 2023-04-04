@@ -1,17 +1,19 @@
 package com.adjecti.security.core.model;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
-
 @Entity
 @Table(name = "user_")
 public class User {
@@ -27,6 +29,7 @@ public class User {
 	private Date createDate;
 	private boolean defaultUser;
 	private long contactId;
+	@Column(name = "password_", nullable = false)
 	private String password_;
 	private boolean passwordEncrypted;
 	private boolean passwordReset;
@@ -35,7 +38,8 @@ public class User {
 	private String reminderQueryQuestion;
 	private String reminderQueryAnswer;
     private int graceLoginCount;
-    private String screenName;
+    @Column(name = "username", unique = true)
+    private String userName;
     private String emailAddress;
     private long facebookId;
     private String googleUserId;
@@ -61,9 +65,10 @@ public class User {
     private String  agreedToTermsOfUse;
     private boolean emailAddressVerified;
     private int status;
-    
-    @OneToMany
-    private List<Role> roles = new ArrayList<>();
+ 
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "userId"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+	private Set<Role> userRole;
 
 	public String getMvccVersion() {
 		return mvccVersion;
@@ -201,12 +206,12 @@ public class User {
 		this.graceLoginCount = graceLoginCount;
 	}
 
-	public String getScreenName() {
-		return screenName;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setScreenName(String screenName) {
-		this.screenName = screenName;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public String getEmailAddress() {
@@ -409,23 +414,23 @@ public class User {
 		this.status = status;
 	}
 
-	public List<Role> getRoles() {
-		return roles;
+	public Set<Role> getUserRole() {
+		return userRole;
 	}
 
-	public void setRoles(List<Role> roles) {
-		this.roles = roles;
+	public void setUserRole(Set<Role> userRole) {
+		this.userRole = userRole;
 	}
 
 	public User(String mvccVersion, long ctCollectionId, String uuid_, String externalReferenceCode, long userId,
 			long companyId, Date createDate, boolean defaultUser, long contactId, String password_,
 			boolean passwordEncrypted, boolean passwordReset, Date passwordModifiedDate, String digest,
-			String reminderQueryQuestion, String reminderQueryAnswer, int graceLoginCount, String screenName,
+			String reminderQueryQuestion, String reminderQueryAnswer, int graceLoginCount, String userName,
 			String emailAddress, long facebookId, String googleUserId, long ldapserverId, String openId, long portletId,
 			String languageId, String timeZoneId, String greeting, String comments, String firstName, String middleName,
 			String lastName, String jobTitle, Date loginDate, String loginIp, Date lastLoginDate, String lastLoginIp,
 			Date lastFailedLoginDate, int failedLoginAttempts, boolean lookout, Date lockoutDate,
-			String agreedToTermsOfUse, boolean emailAddressVerified, int status, List<Role> roles) {
+			String agreedToTermsOfUse, boolean emailAddressVerified, int status, Set<Role> userRole) {
 		super();
 		this.mvccVersion = mvccVersion;
 		this.ctCollectionId = ctCollectionId;
@@ -444,7 +449,7 @@ public class User {
 		this.reminderQueryQuestion = reminderQueryQuestion;
 		this.reminderQueryAnswer = reminderQueryAnswer;
 		this.graceLoginCount = graceLoginCount;
-		this.screenName = screenName;
+		this.userName = userName;
 		this.emailAddress = emailAddress;
 		this.facebookId = facebookId;
 		this.googleUserId = googleUserId;
@@ -470,14 +475,15 @@ public class User {
 		this.agreedToTermsOfUse = agreedToTermsOfUse;
 		this.emailAddressVerified = emailAddressVerified;
 		this.status = status;
-		this.roles = roles;
+		this.userRole = userRole;
 	}
 
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-    
+ 
+		
 	
 
 

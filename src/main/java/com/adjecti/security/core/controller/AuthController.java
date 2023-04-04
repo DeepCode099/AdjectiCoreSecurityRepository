@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.adjecti.security.core.config.JwtAuthResponse;
 import com.adjecti.security.core.config.JwtTokenHelper;
 import com.adjecti.security.core.payloads.JwtAuthRequest;
+import com.adjecti.security.core.payloads.JwtAuthResponse;
 
 @RestController
 @RequestMapping("/api/v1/auth")
