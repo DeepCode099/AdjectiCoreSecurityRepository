@@ -7,6 +7,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import com.adjecti.security.core.config.JwtTokenHelper;
 import com.adjecti.security.core.payloads.JwtAuthRequest;
 import com.adjecti.security.core.payloads.JwtAuthResponse;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/v1/auth")
 public class AuthController {
@@ -31,7 +33,7 @@ public class AuthController {
 
 	@PostMapping("/login")
 	public ResponseEntity<JwtAuthResponse> createToken(@RequestBody JwtAuthRequest request) {
-System.out.println("print responseentity"+request.getUserName());
+        System.out.println("print responseentity"+request.getUserName());
 		this.authenicate(request.getUserName(), request.getPassword());
 		UserDetails userDetails = this.userDetailsService.loadUserByUsername(request.getUserName());
 		System.out.println("userdetails --->"+userDetails.getUsername());

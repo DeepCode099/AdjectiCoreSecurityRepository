@@ -42,9 +42,6 @@ public class UserGroupRoleServiceImpl implements UserGroupRoleService {
 	
 		UserGroupRole existingUserGroupRole = userGroupRoleRepository.findById(userGroupRoleId)
 				.orElseThrow(() -> new ResourceNotFoundException("UserGroupRole", "Id", userGroupRoleId));
-	
-		existingUserGroupRole.setMvccVersion(userGroupRole.getMvccVersion());
-		existingUserGroupRole.setCtCollectionId(userGroupRole.getCtCollectionId());
 		existingUserGroupRole.setCompanyId(userGroupRole.getCompanyId());
 		existingUserGroupRole.setGroupId(userGroupRole.getGroupId());
 		existingUserGroupRole.setRoleId(userGroupRole.getRoleId());

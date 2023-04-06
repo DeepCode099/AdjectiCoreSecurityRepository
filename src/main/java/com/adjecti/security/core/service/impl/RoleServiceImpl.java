@@ -41,20 +41,14 @@ public class RoleServiceImpl implements RoleService {
 	public Role updateRole(Role role, long id) {
 		Role existingRole = roleRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Role", "Id", id));
-		existingRole.setClassNameId(role.getClassNameId());
-		existingRole.setClasspk(role.getClasspk());
 		existingRole.setCompanyId(role.getCompanyId());
 		existingRole.setCreateDate(role.getCreateDate());
-		existingRole.setCtCollectionId(role.getCtCollectionId());
 		existingRole.setDescription(role.getDescription());
 		existingRole.setModifiedDate(role.getModifiedDate());
-		existingRole.setMvccVersion(role.getMvccVersion());
 		existingRole.setName(role.getName());
 		existingRole.setSubType(role.getSubType());
 		existingRole.setTitle(role.getTitle());
 		existingRole.setType(role.getType());
-		existingRole.setUserName(role.getUserName());
-		existingRole.setUuid_(role.getUuid_());
 		existingRole.setUserId(role.getUserId());
 		return roleRepository.save(existingRole);
 	}
@@ -66,11 +60,6 @@ public class RoleServiceImpl implements RoleService {
 		// TODO Auto-generated method stub
 		roleRepository.deleteById(id);
 
-	}
-
-	@Override
-	public Set<Role> getRoleByUserId(long userId) {
-		return null;
 	}
 
 }

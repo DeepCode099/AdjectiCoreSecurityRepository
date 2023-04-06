@@ -2,6 +2,7 @@ package com.adjecti.security.core.model;
 
 import java.util.Date;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,13 +13,10 @@ import jakarta.persistence.Table;
 @Table(name = "usergroup")
 public class UserGroup {
 
-	private long mvccVersion;
-	private long  ctCollectionId;
-	private String  uuid_;
-	private String externalReferenceCode;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long userGroupId;
+	@Column(name ="usergroupid")
+	private long id;
 	private long companyId;
 	private long userId;
 	private String userName;
@@ -28,35 +26,12 @@ public class UserGroup {
 	private String name;
 	private String description;
 	private boolean addedByLdapImport;
-	public long getMvccVersion() {
-		return mvccVersion;
+	private String externalReferenceCode;
+	public long getId() {
+		return id;
 	}
-	public void setMvccVersion(long mvccVersion) {
-		this.mvccVersion = mvccVersion;
-	}
-	public long getCtCollectionId() {
-		return ctCollectionId;
-	}
-	public void setCtCollectionId(long ctCollectionId) {
-		this.ctCollectionId = ctCollectionId;
-	}
-	public String getUuid_() {
-		return uuid_;
-	}
-	public void setUuid_(String uuid_) {
-		this.uuid_ = uuid_;
-	}
-	public String getExternalReferenceCode() {
-		return externalReferenceCode;
-	}
-	public void setExternalReferenceCode(String externalReferenceCode) {
-		this.externalReferenceCode = externalReferenceCode;
-	}
-	public long getUserGroupId() {
-		return userGroupId;
-	}
-	public void setUserGroupId(long userGroupId) {
-		this.userGroupId = userGroupId;
+	public void setId(long id) {
+		this.id = id;
 	}
 	public long getCompanyId() {
 		return companyId;
@@ -112,15 +87,17 @@ public class UserGroup {
 	public void setAddedByLdapImport(boolean addedByLdapImport) {
 		this.addedByLdapImport = addedByLdapImport;
 	}
-	public UserGroup(long mvccVersion, long ctCollectionId, String uuid_, String externalReferenceCode,
-			long userGroupId, long companyId, long userId, String userName, Date createDate, Date modifiedDate,
-			long parentUserGroupId, String name, String description, boolean addedByLdapImport) {
-		super();
-		this.mvccVersion = mvccVersion;
-		this.ctCollectionId = ctCollectionId;
-		this.uuid_ = uuid_;
+	public String getExternalReferenceCode() {
+		return externalReferenceCode;
+	}
+	public void setExternalReferenceCode(String externalReferenceCode) {
 		this.externalReferenceCode = externalReferenceCode;
-		this.userGroupId = userGroupId;
+	}
+	public UserGroup(long id, long companyId, long userId, String userName, Date createDate, Date modifiedDate,
+			long parentUserGroupId, String name, String description, boolean addedByLdapImport,
+			String externalReferenceCode) {
+		super();
+		this.id = id;
 		this.companyId = companyId;
 		this.userId = userId;
 		this.userName = userName;
@@ -130,12 +107,12 @@ public class UserGroup {
 		this.name = name;
 		this.description = description;
 		this.addedByLdapImport = addedByLdapImport;
+		this.externalReferenceCode = externalReferenceCode;
 	}
 	public UserGroup() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	
+
 	
 }

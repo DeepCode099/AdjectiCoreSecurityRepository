@@ -36,9 +36,6 @@ public class UserGroupServiceImpl implements UserGroupService {
 	public UserGroup updateUserGroup(UserGroup userGroup, long id) {
 		UserGroup existingUserGroup = userGroupRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("UserGroup", "Id", id));
-		existingUserGroup.setMvccVersion(userGroup.getMvccVersion());
-		existingUserGroup.setCtCollectionId(userGroup.getCtCollectionId());
-		existingUserGroup.setUuid_(userGroup.getUuid_());
 		existingUserGroup.setExternalReferenceCode(userGroup.getExternalReferenceCode());
 		existingUserGroup.setUserId(userGroup.getUserId());
 		existingUserGroup.setCompanyId(userGroup.getCompanyId());

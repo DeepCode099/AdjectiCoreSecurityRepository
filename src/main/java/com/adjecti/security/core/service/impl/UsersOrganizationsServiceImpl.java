@@ -44,11 +44,8 @@ public class UsersOrganizationsServiceImpl implements UsersOrganizationService {
 				.orElseThrow(() -> new ResourceNotFoundException("UserOrganization", "Id", UserOrganizationId));
 		existingUsersOrganizations.setCompanyId(usersOrganization.getCompanyId());
 		existingUsersOrganizations.setUserId(usersOrganization.getUserId());
-		existingUsersOrganizations.setCtCollectionId(usersOrganization.getCtCollectionId());
-		existingUsersOrganizations.setCtChangeType(usersOrganization.isCtChangeType());
-		existingUsersOrganizations.setOrganizationId(usersOrganization.getOrganizationId());
+		existingUsersOrganizations.setId(usersOrganization.getId());
 		return usersOrganizationsRepository.save(existingUsersOrganizations);
-
 	}
 
 	@Override

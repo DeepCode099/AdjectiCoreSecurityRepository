@@ -2,11 +2,14 @@ package com.adjecti.security.core.service.impl;
 
 import java.util.Base64;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
 import com.adjecti.security.core.exception.ResourceNotFoundException;
+import com.adjecti.security.core.model.Role;
 import com.adjecti.security.core.model.User;
+import com.adjecti.security.core.repository.RoleRepository;
 import com.adjecti.security.core.repository.UserRepository;
 import com.adjecti.security.core.service.UserService;
 
@@ -14,6 +17,8 @@ import com.adjecti.security.core.service.UserService;
 public class UserServiceImpl implements UserService {
 
 	private UserRepository userRepository;
+	
+	private RoleRepository roleRepository;
 
 	public UserServiceImpl(UserRepository userRepository) {
 		super();
@@ -25,7 +30,10 @@ public class UserServiceImpl implements UserService {
 	 String password =	user.getPassword_();
      String encodedPassword = Base64.getEncoder().encodeToString(password.getBytes());
      user.setPassword_(encodedPassword);
-		return userRepository.save(user);
+		/*
+		 * Set<Role> roleList = roleRepository.getAllRolesByUserId(user.getUserId());
+		 * user.setUserRole(roleList);
+		 */ return userRepository.save(user);
 	}
 
 	@Override
@@ -51,7 +59,7 @@ public class UserServiceImpl implements UserService {
 		existingUser.setCompanyId(user.getCompanyId());
 		existingUser.setContactId(user.getContactId());
 		existingUser.setCreateDate(user.getCreateDate());
-		existingUser.setCtCollectionId(user.getCtCollectionId());
+
 		existingUser.setDefaultUser(user.isDefaultUser());
 		existingUser.setDigest(user.getDigest());
 		existingUser.setEmailAddressVerified(user.isEmailAddressVerified());
@@ -70,20 +78,17 @@ public class UserServiceImpl implements UserService {
 		existingUser.setLockoutDate(user.getLockoutDate());
 		existingUser.setLoginDate(user.getLoginDate());
 		existingUser.setLoginIp(user.getLoginIp());
-		existingUser.setLookout(user.isLookout());
-		existingUser.setMvccVersion(user.getMvccVersion());
+	
 		existingUser.setOpenId(user.getOpenId());
 		existingUser.setPasswordEncrypted(user.isPasswordEncrypted());
 		existingUser.setPasswordModifiedDate(user.getPasswordModifiedDate());
 		existingUser.setPasswordReset(user.isPasswordReset());
 		existingUser.setPassword_(user.getPassword_());
-		existingUser.setPortletId(user.getPortletId());
 		existingUser.setReminderQueryAnswer(user.getReminderQueryAnswer());
 		existingUser.setReminderQueryQuestion(user.getReminderQueryQuestion());
 		existingUser.setUserName(user.getUserName());
 		existingUser.setStatus(user.getStatus());
 		existingUser.setTimeZoneId(user.getTimeZoneId());
-		existingUser.setUuid_(user.getUuid_());
 		return userRepository.save(existingUser);
 	}
 
@@ -93,7 +98,4 @@ public class UserServiceImpl implements UserService {
 		userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User", "Id", id));
 		userRepository.deleteById(id);
 	}
-
-	
-
 }

@@ -1,5 +1,6 @@
 package com.adjecti.security.core.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,31 +12,17 @@ import jakarta.persistence.Table;
 public class UserGroupRole {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)	
-	private long userGroupRoleId;
-	
-	private long mvccVersion;
-	private long ctCollectionId;
+	@Column(name ="usergroupid")
+	private long id;
 	private long companyId;
 	private long userId;
 	private long groupId;
 	private long roleId;
-	public long getUserGroupRoleId() {
-		return userGroupRoleId;
+	public long getId() {
+		return id;
 	}
-	public void setUserGroupRoleId(long userGroupRoleId) {
-		this.userGroupRoleId = userGroupRoleId;
-	}
-	public long getMvccVersion() {
-		return mvccVersion;
-	}
-	public void setMvccVersion(long mvccVersion) {
-		this.mvccVersion = mvccVersion;
-	}
-	public long getCtCollectionId() {
-		return ctCollectionId;
-	}
-	public void setCtCollectionId(long ctCollectionId) {
-		this.ctCollectionId = ctCollectionId;
+	public void setId(long id) {
+		this.id = id;
 	}
 	public long getCompanyId() {
 		return companyId;
@@ -61,22 +48,18 @@ public class UserGroupRole {
 	public void setRoleId(long roleId) {
 		this.roleId = roleId;
 	}
-	public UserGroupRole(long userGroupRoleId, long mvccVersion, long ctCollectionId, long companyId, long userId,
-			long groupId, long roleId) {
+	public UserGroupRole() {
 		super();
-		this.userGroupRoleId = userGroupRoleId;
-		this.mvccVersion = mvccVersion;
-		this.ctCollectionId = ctCollectionId;
+		// TODO Auto-generated constructor stub
+	}
+	public UserGroupRole(long id, long companyId, long userId, long groupId, long roleId) {
+		super();
+		this.id = id;
 		this.companyId = companyId;
 		this.userId = userId;
 		this.groupId = groupId;
 		this.roleId = roleId;
 	}
-	public UserGroupRole() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	
 	
 	
 	

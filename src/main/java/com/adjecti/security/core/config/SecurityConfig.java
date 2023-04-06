@@ -50,7 +50,11 @@ public class SecurityConfig {
 		.disable()
 		.authorizeHttpRequests()
 		.requestMatchers("api/v1/user")
-		.hasRole("ADMIN")
+		.permitAll()
+		.requestMatchers("/api/v1/employee")
+		.permitAll()
+		.requestMatchers("/api/v1/bloodGroup")
+		.permitAll()
 	    .requestMatchers("api/v1/auth/login")
 		.permitAll()
 		.anyRequest()
@@ -60,7 +64,7 @@ public class SecurityConfig {
 	    .authenticationEntryPoint(this.jwtAuthenticationEntryPoint)
 	    .and()
 	    .sessionManagement()
-	    .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+	    .sessionCreationPolicy(SessionCreationPolicy.STATELESS); 
 		httpSecurity.addFilterBefore(this.jwtAuthenticationFilter,UsernamePasswordAuthenticationFilter.class);
 		httpSecurity.authenticationProvider(daoAuthenticationProvider());
 		DefaultSecurityFilterChain defaultSecurityFilterChain = httpSecurity.build();
@@ -71,6 +75,5 @@ public class SecurityConfig {
 	public AuthenticationManager authenticationManagerBean(AuthenticationConfiguration configuration) throws Exception {
 		return configuration.getAuthenticationManager();
 	}
-	
 	
 }
