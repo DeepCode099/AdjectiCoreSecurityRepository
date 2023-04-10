@@ -1,38 +1,32 @@
 package com.adjecti.security.core.service.impl;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.adjecti.security.core.exception.ResourceNotFoundException;
+import com.adjecti.security.core.model.State;
+import com.adjecti.security.core.repository.StateRepository;
 import com.adjecti.security.core.service.StateService;
 
 
-//@Service
-public class StateServiceImpl  {
+@Service
+public class StateServiceImpl implements StateService  {
+    
+	private StateRepository stateRepository;
 
-	/*
-	 * private StateRepository stateRepository;
-	 * 
-	 * public StateServiceImpl(StateRepository stateRepository) { super();
-	 * this.stateRepository = stateRepository; }
-	 */
+	public StateServiceImpl(StateRepository stateRepository) {
+		super();
+		this.stateRepository = stateRepository;
+	}
 
-	/*
-	 * @Override public List<State> getAllStates() { return
-	 * stateRepository.findAll(); }
-	 * 
-	 * @Override public List<State> getAllStatesByCountryCode(String countryCode) {
-	 * 
-	 * 
-	 * 
-	 * return null; }
-	 * 
-	 * @Override public List<State> getAllStatesByStateCode(long stateCode) { //
-	 * TODO Auto-generated method stub
-	 * 
-	 * //stateRepository.findByStateId(stateCode);
-	 * 
-	 * return null; }
-	 */
-	
-	
-	
+	@Override
+	public List<State> getStateListByCountryId(Long countryId) {
+		System.out.println("country id --"+countryId);
+		return stateRepository.findByCountryId(countryId);
+		} 
+
 	
 
 }

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.adjecti.security.core.model.Role;
 import com.adjecti.security.core.service.RoleService;
+
 @CrossOrigin("*")
 @RestController
 @RequestMapping("/api/v1/role")

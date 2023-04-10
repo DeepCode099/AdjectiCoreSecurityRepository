@@ -1,10 +1,10 @@
 package com.adjecti.security.core.service;
 
+import java.util.List;
+
+import com.adjecti.security.core.model.State;
+
 public interface StateService {
-	/*
-	 * public List<State> getAllStates(); public List<State>
-	 * getAllStatesByCountryCode(String countryCode); public List<State>
-	 * getAllStatesByStateCode(long stateCode);
-	 */
 	
+	public List<State> getStateListByCountryId(Long countryId);
 }
