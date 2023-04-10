@@ -21,7 +21,7 @@ public class City {
     @Column(name ="cityName")
 	private String name;
     @Column(name = "cityCode")
-	private long code;
+	private String code;
 	@Column(name ="stateid")
     private long stateId;
 	public long getId() {
@@ -36,10 +36,10 @@ public class City {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public long getCode() {
+	public String getCode() {
 		return code;
 	}
-	public void setCode(long code) {
+	public void setCode(String code) {
 		this.code = code;
 	}
 	public long getStateId() {
@@ -48,7 +48,7 @@ public class City {
 	public void setStateId(long stateId) {
 		this.stateId = stateId;
 	}
-	public City(long id, String name, long code, long stateId) {
+	public City(long id, String name, String code, long stateId) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -59,7 +59,7 @@ public class City {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-		
+	
 	
 	
 }
