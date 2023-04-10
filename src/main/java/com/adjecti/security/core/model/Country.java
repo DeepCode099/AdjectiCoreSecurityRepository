@@ -1,14 +1,11 @@
 
 package com.adjecti.security.core.model;
 
-import java.util.List;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -22,8 +19,6 @@ public class Country {
 	private String code;
 	@Column(name = "countryname")
 	private String name;
-	@OneToMany(mappedBy = "country")
-	private List<State> state;
 	public long getId() {
 		return id;
 	}
@@ -42,22 +37,16 @@ public class Country {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public List<State> getState() {
-		return state;
-	}
-	public void setState(List<State> state) {
-		this.state = state;
-	}
-	public Country(long id, String code, String name, List<State> state) {
+	public Country(long id, String code, String name) {
 		super();
 		this.id = id;
 		this.code = code;
 		this.name = name;
-		this.state = state;
 	}
 	public Country() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-   
+	
+  
 }

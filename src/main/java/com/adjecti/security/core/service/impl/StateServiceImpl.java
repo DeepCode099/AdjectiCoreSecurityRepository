@@ -2,10 +2,8 @@ package com.adjecti.security.core.service.impl;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.adjecti.security.core.exception.ResourceNotFoundException;
 import com.adjecti.security.core.model.State;
 import com.adjecti.security.core.repository.StateRepository;
 import com.adjecti.security.core.service.StateService;
@@ -22,11 +20,11 @@ public class StateServiceImpl implements StateService  {
 	}
 
 	@Override
-	public List<State> getStateListByCountryId(Long countryId) {
-		System.out.println("country id --"+countryId);
-		return stateRepository.findByCountryId(countryId);
-		} 
+	public List<State> getStateListByCountryId(long countryId) {
+		return stateRepository.getStateListByCountryId(countryId);
+	}
 
+	
 	
 
 }

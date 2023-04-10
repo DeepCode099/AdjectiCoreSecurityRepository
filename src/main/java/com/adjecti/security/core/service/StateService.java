@@ -6,5 +6,5 @@ import com.adjecti.security.core.model.State;
 
 public interface StateService {
 	
-	public List<State> getStateListByCountryId(Long countryId);
+	public List<State> getStateListByCountryId(long countryId);
 }

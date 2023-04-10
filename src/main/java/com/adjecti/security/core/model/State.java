@@ -25,19 +25,8 @@ public class State {
 	private String name;
 	@Column(name ="statecode")
 	private String code;
-	@ManyToOne
-	@JoinColumn(name = "countryid", nullable = false)
-	private Country country;
-    @OneToMany(mappedBy = "state")
-	private List<City> cityList;
-	public State(long id, String name, String code, Country country, List<City> cityList) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.code = code;
-		this.country = country;
-		this.cityList = cityList;
-	}
+    @Column(name ="countryid")
+	private long countryid;
 	public long getId() {
 		return id;
 	}
@@ -56,23 +45,23 @@ public class State {
 	public void setCode(String code) {
 		this.code = code;
 	}
-	public Country getCountry() {
-		return country;
+	public long getCountryid() {
+		return countryid;
 	}
-	public void setCountry(Country country) {
-		this.country = country;
+	public void setCountryid(long countryid) {
+		this.countryid = countryid;
 	}
-	public List<City> getCityList() {
-		return cityList;
-	}
-	public void setCityList(List<City> cityList) {
-		this.cityList = cityList;
+	public State(long id, String name, String code, long countryid) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.code = code;
+		this.countryid = countryid;
 	}
 	public State() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
 	
 	
 }

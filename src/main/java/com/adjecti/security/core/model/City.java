@@ -21,14 +21,13 @@ public class City {
     @Column(name ="cityName")
 	private String name;
     @Column(name = "cityCode")
-	private String code;
-	@ManyToOne
-	@JoinColumn(name = "stateid", nullable = false)
-	private State state;
+	private long code;
+	@Column(name ="stateid")
+    private long stateId;
 	public long getId() {
 		return id;
 	}
-	public void setCityId(long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	public String getName() {
@@ -37,30 +36,30 @@ public class City {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getCode() {
+	public long getCode() {
 		return code;
 	}
-	public void setCode(String code) {
+	public void setCode(long code) {
 		this.code = code;
 	}
-	public State getState() {
-		return state;
+	public long getStateId() {
+		return stateId;
 	}
-	public void setState(State state) {
-		this.state = state;
+	public void setStateId(long stateId) {
+		this.stateId = stateId;
 	}
-	public City(long id, String name, String code, State state) {
+	public City(long id, String name, long code, long stateId) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.code = code;
-		this.state = state;
+		this.stateId = stateId;
 	}
 	public City() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-    
+		
 	
 	
 }
