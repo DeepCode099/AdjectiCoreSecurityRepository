@@ -27,13 +27,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User createUser(User user) {
-	 String password =	user.getPassword_();
-     String encodedPassword = Base64.getEncoder().encodeToString(password.getBytes());
-     user.setPassword_(encodedPassword);
-		/*
-		 * Set<Role> roleList = roleRepository.getAllRolesByUserId(user.getUserId());
-		 * user.setUserRole(roleList);
-		 */ return userRepository.save(user);
+	 return userRepository.save(user);
 	}
 
 	@Override
@@ -97,5 +91,15 @@ public class UserServiceImpl implements UserService {
 		// check whether a user exist or not
 		userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User", "Id", id));
 		userRepository.deleteById(id);
+	}
+
+	@Override
+	public Boolean existsByUserName(String userName) {
+		return userRepository.existsByUserName(userName);
+	}
+
+	@Override
+	public User findByUserName(String userName) {
+		return userRepository.findByUserName(userName);
 	}
 }

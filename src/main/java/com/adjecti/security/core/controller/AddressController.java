@@ -22,7 +22,6 @@ private AddressService addressService;
 		super();
 		this.addressService = addressService;
 	}
-	
 	@PostMapping
 	public ResponseEntity<Address> createAddress(@RequestBody Address address){
 		return new ResponseEntity<Address>(addressService.createAddress(address), HttpStatus.CREATED);

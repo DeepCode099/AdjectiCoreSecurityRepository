@@ -1,6 +1,7 @@
 package com.adjecti.security.core.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.stereotype.Service;
@@ -60,6 +61,11 @@ public class RoleServiceImpl implements RoleService {
 		// TODO Auto-generated method stub
 		roleRepository.deleteById(id);
 
+	}
+
+	@Override
+	public Optional<Role> findByName(String name) {
+		return  roleRepository.findByName(name);
 	}
 
 }

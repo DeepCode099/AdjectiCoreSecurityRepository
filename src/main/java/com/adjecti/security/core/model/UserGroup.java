@@ -12,7 +12,6 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "usergroup")
 public class UserGroup {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name ="usergroupid")

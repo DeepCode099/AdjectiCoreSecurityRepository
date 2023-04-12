@@ -10,7 +10,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.DefaultSecurityFilterChain;
 import org.springframework.security.web.SecurityFilterChain;
@@ -27,9 +27,11 @@ public class SecurityConfig {
     @Autowired
     private CustomUserDetailService customUserDetailService;
 
+   
+    
 	@Bean
 	public PasswordEncoder passwordEncoder() {
-		return NoOpPasswordEncoder.getInstance();
+		return new BCryptPasswordEncoder();
 	}
 	@Bean
 	public UserDetailsService userDetailsService() {
@@ -49,16 +51,10 @@ public class SecurityConfig {
 		 httpSecurity.csrf()
 		.disable()
 		.authorizeHttpRequests()			
-		.requestMatchers("api/v1/state/*")
-        .permitAll()
-		.requestMatchers("/api/v1/country")
-        .permitAll()
-		.requestMatchers("/api/v1/bloodGroup")
-        .permitAll()
-	    .requestMatchers("api/v1/auth/login")
+	    .requestMatchers("api/v1/user/register").permitAll()
+		.requestMatchers("api/v1/auth/login")
 		.permitAll()
-		.requestMatchers("/api/v1/city/*")
-		.permitAll()
+		.requestMatchers("api/v1/admin").hasRole("ADMIN")
 		.anyRequest()
 	    .authenticated()
 	    .and()

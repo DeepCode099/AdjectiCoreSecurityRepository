@@ -1,5 +1,6 @@
 package com.adjecti.security.core.payloads;
 
+// for login
 public class JwtAuthRequest {
 	
 	private String userName;

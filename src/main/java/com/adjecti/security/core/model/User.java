@@ -524,6 +524,16 @@ public class User {
 		// TODO Auto-generated constructor stub
 	}
 
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", companyId=" + companyId + ", password_=" + password_ + ", passwordEncrypted="
+				+ passwordEncrypted + ", passwordReset=" + passwordReset + ", passwordModifiedDate="
+				+ passwordModifiedDate + ", userName=" + userName + ", emailAddress=" + emailAddress + ", firstName="
+				+ firstName + ", middleName=" + middleName + ", lastName=" + lastName + ", userRole=" + userRole + "]";
+	}
+	
+
 	
 	
 

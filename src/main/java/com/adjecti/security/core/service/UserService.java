@@ -10,5 +10,7 @@ public interface UserService {
 	   public User getUserById(long id);
 	   public User updateUser(User user, long id);
 	   public void deleteUser(long id); 
+	   public Boolean existsByUserName(String userName);
+	   public User findByUserName(String userName);
 
 }

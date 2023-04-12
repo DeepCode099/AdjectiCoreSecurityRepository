@@ -1,5 +1,6 @@
 package com.adjecti.security.core.repository;
 
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,4 +12,8 @@ public interface RoleRepository extends JpaRepository<Role, Long> {
 
 	@Query(value = "SELECT * from role_ where userid = ?",nativeQuery = true)
 	public Set<Role> getAllRolesByUserId(long userId);
+
+	 Optional<Role> findByName(String name);
+	
 }
+
