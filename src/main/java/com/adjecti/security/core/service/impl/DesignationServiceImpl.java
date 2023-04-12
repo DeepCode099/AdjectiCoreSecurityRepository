@@ -24,4 +24,10 @@ public class DesignationServiceImpl  implements DesignationService{
 		return designationRepositroy.findAll();
 	}
 
+
+	@Override
+	public Designation createDesignation(Designation designation) {
+		return designationRepositroy.save(designation);
+	}
+
 }

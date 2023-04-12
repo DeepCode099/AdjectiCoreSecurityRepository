@@ -21,6 +21,10 @@ public class BloodGroupServiceImpl implements BloodGroupService {
 	public List<BloodGroup> getAllBloodGroup() {
 		return bloodGroupRepository.findAll();
 	}
+	@Override
+	public BloodGroup createBloodGroup(BloodGroup bloodGroup) {
+		return bloodGroupRepository.save(bloodGroup);
+	}
 
 	
 	
