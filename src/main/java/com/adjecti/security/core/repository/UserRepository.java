@@ -1,7 +1,5 @@
 package com.adjecti.security.core.repository;
 
-import java.util.Optional;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.adjecti.security.core.model.User;

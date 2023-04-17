@@ -1,24 +1,30 @@
 package com.adjecti.security.core.service.impl;
 
-import java.util.Base64;
+import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.adjecti.security.core.exception.ResourceNotFoundException;
 import com.adjecti.security.core.model.Role;
 import com.adjecti.security.core.model.User;
-import com.adjecti.security.core.repository.RoleRepository;
 import com.adjecti.security.core.repository.UserRepository;
+import com.adjecti.security.core.service.RoleService;
 import com.adjecti.security.core.service.UserService;
 
 @Service
 public class UserServiceImpl implements UserService {
 
+	@Autowired
 	private UserRepository userRepository;
-	
-	private RoleRepository roleRepository;
+
+	@Autowired
+	private PasswordEncoder bCryptPasswordEncoder;
+
+	@Autowired
+	private RoleService roleServie;
 
 	public UserServiceImpl(UserRepository userRepository) {
 		super();
@@ -27,7 +33,19 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User createUser(User user) {
-	 return userRepository.save(user);
+		String password = user.getPassword_();
+		user.setPassword_(bCryptPasswordEncoder.encode(password));
+		System.out.println("encoded password" + user.getPassword_());
+		List<User> users = getAllUsers();
+		Role role = null;
+		if (users.size() > 0) {
+			role = roleServie.findByName("ROLE_USER").get();
+		} else {
+			role = roleServie.findByName("ROLE_ADMIN").get();
+		}
+		user.setUserRole(Collections.singleton(role));
+		System.out.println("user object" + user.toString());
+		return userRepository.save(user);
 	}
 
 	@Override
@@ -40,6 +58,7 @@ public class UserServiceImpl implements UserService {
 		return userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User", "Id", id));
 
 	}
+
 	@Override
 	public User updateUser(User user, long id) {
 		User existingUser = userRepository.findById(id)
@@ -72,7 +91,7 @@ public class UserServiceImpl implements UserService {
 		existingUser.setLockoutDate(user.getLockoutDate());
 		existingUser.setLoginDate(user.getLoginDate());
 		existingUser.setLoginIp(user.getLoginIp());
-	
+
 		existingUser.setOpenId(user.getOpenId());
 		existingUser.setPasswordEncrypted(user.isPasswordEncrypted());
 		existingUser.setPasswordModifiedDate(user.getPasswordModifiedDate());
@@ -102,4 +121,5 @@ public class UserServiceImpl implements UserService {
 	public User findByUserName(String userName) {
 		return userRepository.findByUserName(userName);
 	}
+
 }
